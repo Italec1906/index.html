@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para mi peque 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      overflow: hidden;
+    }
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: left 1s ease;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .slide.active {
+      left: 0;
+    }
+    img {
+      width: 250px;
+      border-radius: 20px;
+      margin-top: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      font-size: 28px;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 20px;
+      max-width: 700px;
+      color: #333;
+    }
+    .button-group {
+      margin-top: 30px;
+      position: relative;
+      width: 100%;
+      height: 100px;
+    }
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      margin: 0 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .yes {
+      background-color: #28a745;
+      color: white;
+    }
+    .no {
+      background-color: #dc3545;
+      color: white;
+      position: absolute;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      max-width: 500px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .modal-content h2 {
+      color: #d63384;
+      font-size: 24px;
+    }
+    .modal-content p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    .flowers {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="slide active" id="slide1">
+    <p>
+     Hola peque, yo sé que estás un poco desanimada por cosas que te vienen pasando y la verdad que quisiera que nos despejemos un poco y pasarla bien juntos. Sé que tus problemas familiares te afectan y a veces me gustaria que toda esa tristeza se te vaya, pero sé que eres una chica muy guerrera y de igual forma yo siempre estare ahí para ti y para lo que necesites, así que nunca te sientas sola. La verdad que tengo muchas ganas de animarnos y sobre todo a ti, así que pensé en que si te daba gusto y aceptas venir a mi casa para darte algo que no te doy hace mucho tiempo y también prepararnos algo rico para picar y ver Stranger Things en mi sala, mientras compartimos y la pasamos bien ♥️
+    </p>
+    <img src="recortada_netflix_comida.png" alt="Netflix y comida">
+    <button onclick="nextSlide()">Siguiente</button>
+  </div>
+
+
+  <div class="slide" id="slide2">
+    <h1>¿Aceptas pasar un sábado conmigo?</h1>
+    <div class="button-group" id="buttonGroup">
+      <button class="yes" id="yesBtn" onclick="showModal()">Sí 💚</button>
+      <button class="no" id="noBtn">No 😢</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>¡Sabía que aceptarías, te amo peque! 💖🤍</h2>
+      <p>Prepárate para un maravilloso día de novios</p>
+      <div class="flowers">🌸🌼🌷</div>
+    </div>
+  </div>
+
+  <script>
+    function nextSlide() {
+      document.getElementById("slide1").classList.remove("active");
+      document.getElementById("slide2").classList.add("active");
+    }
+
+    function showModal() {
+      document.getElementById("modal").style.display = "flex";
+      document.getElementById("buttonGroup").style.display = "none";
+    }
+
+    const noBtn = document.getElementById("noBtn");
+    const group = document.querySelector(".button-group");
+
+    noBtn.addEventListener("mouseover", () => {
+      const yesBtn = document.getElementById("yesBtn");
+      const buffer = 120; // espacio entre el botón sí y el no
+      const maxX = group.clientWidth - noBtn.offsetWidth;
+      const maxY = group.clientHeight - noBtn.offsetHeight;
+      let randX, randY;
+      do {
+        randX = Math.random() * maxX;
+        randY = Math.random() * maxY;
+      } while (Math.abs(randX - yesBtn.offsetLeft) < buffer && Math.abs(randY - yesBtn.offsetTop) < buffer);
+      noBtn.style.left = randX + "px";
+      noBtn.style.top = randY + "px";
+    });
+  </script>
+</body>
+</html>
